@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TodoList</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="./stylesheets/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+</head>
+
+<body>
+
+  <div id="app" class="bg">
+    <div class="bg-filter">
+
+      <section class="alter-message">
+        <div class="alter-item animate__animated animate__fadeInRight"
+          :class="'alert-' + item.color"
+          v-for="(item, i) in message" :key="i">
+          <span>{{ item.title }}</span>
+        </div>
+      </section>
+
+      <section class="container">
+        <div class="row">
+          <div class="col">
+            <div class="todo-area p-3 d-flex flex-column">
+
+              <h1 class="text-center mb-3">Todo List</h1>
+
+              <div class="d-flex justify-content-center mb-3">
+                <input type="text" class="todo-input mr-2"
+                  v-model="inputTitle" @keydown.enter="addList">
+                <button class="btn btn-wood" @click="addList">新增事項</button>
+              </div>
+
+              <div class="w-75 align-self-center">
+                <div class="text-center" v-if="!todoList.length">
+                  <span class="wt-something">寫點什麼吧!</span>
+                </div>
+
+                <div class="d-flex justify-content-center" v-else>
+                  <a href="#" class="btn btn-wood mr-1"
+                    :class="{'active': status==''}"
+                    @click.prevent="status=''">全部事項</a>
+                  <a href="#" class="btn btn-wood mr-1"
+                    :class="{'active': status=='undone'}"
+                    @click.prevent="status='undone'">未完成</a>
+                  <a href="#" class="btn btn-wood"
+                  :class="{'active': status=='done'}"
+                    @click.prevent="status='done'">已完成</a>
+                </div>
+              
+                <!-- <ul class="todo-list">
+                  <li class="d-flex align-items-center mt-3"
+                    v-for="item in todoListFilter" :key="item.id">
+                    <input type="checkbox" class="mr-2" :id="item.id"
+                      v-model="item.completed" @change="updateLocalStorage">
+                    <label class="m-0"
+                      :for="item.id"
+                      :class="{'completed': item.completed }"
+                    >
+                      {{ item.title }}
+                    </label>
+                    <a href="#" class="ml-auto text-danger"
+                      @click.prevent="deleteList(item.id)">
+                      <i class="fas fa-times"></i>
+                    </a>
+                  </li>
+                </ul> -->
+
+                <ul class="todo-list">
+                  <draggable v-model="todoList" animation="200">
+                    <transition-group>
+                      <li class="d-flex align-items-center mt-3"
+                        v-for="item in todoListFilter" :key="item.id" @dragend="updateLocalStorage">
+                        <input type="checkbox" class="mr-2" :id="item.id"
+                          v-model="item.completed" @change="updateLocalStorage">
+                        <label class="m-0"
+                          :for="item.id"
+                          :class="{'completed': item.completed }"
+                        >
+                          {{ item.title }}
+                        </label>
+                        <a href="#" class="ml-auto text-danger"
+                          @click.prevent="deleteList(item.id)">
+                          <i class="fas fa-times"></i>
+                        </a>
+                      </li>
+                    </transition-group>
+                  </draggable>
+                </ul>
+      
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+  
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.19.2/vuedraggable.umd.min.js"></script>
+  <script src="./all.js"></script>
+</body>
+
+</html>

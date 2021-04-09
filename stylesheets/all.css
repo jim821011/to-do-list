@@ -1,0 +1,81 @@
+.bg {
+  background-image: url(../images/background.jpg);
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.bg-filter {
+  backdrop-filter: brightness(50%);
+  min-height: 100vh;
+}
+
+.todo-area {
+  background-color: white;
+  opacity: 0.8;
+  margin: 50px 0px;
+  border-radius: 5px;
+}
+
+.todo-input {
+  background-color: #80808057;
+  width: 50%;
+  border-radius: 5px;
+  padding: 5px;
+  outline: none;
+  transition: all 0.5s;
+}
+
+.todo-input:focus {
+  background-color: white;
+}
+
+.btn-wood {
+  background-color: #312c2bba;
+  color: white;
+}
+
+.btn-wood:hover, .btn-wood.active {
+  background-color: #312c2b;
+  color: white;
+}
+
+.btn-wood:focus {
+  box-shadow: none;
+}
+
+.btn-wood:active {
+  box-shadow: #312c2bba 0 0 5px 0;
+}
+
+.wt-something {
+  font-size: 2rem;
+  font-weight: bolder;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #312c2b;
+}
+
+.todo-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1.5rem;
+  color: #312c2bba;
+}
+
+.alter-message {
+  position: fixed;
+  top: 56px;
+  right: 20px;
+  z-index: 1100;
+  overflow: hidden;
+}
+
+.alter-item {
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+/*# sourceMappingURL=all.css.map */
